@@ -5,6 +5,9 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_SAVE_REQUEST,
+  PRODUCT_SAVE_SUCCESS,
+  PRODUCT_SAVE_FAIL,
 } from "../constants";
 
 /* state = products : []
@@ -53,4 +56,21 @@ function productDetailsReducer(state = { product: {} }, action) {
   }
 }
 
-export { productListReducer, productDetailsReducer };
+function productSaveReducer(state = { product: {} }, action) {
+  switch (action.type) {
+    // initially loading
+    case PRODUCT_SAVE_REQUEST:
+      return { loading: true };
+    // if success set loading false and products are in the action
+    case PRODUCT_SAVE_SUCCESS:
+      return { loading: false, success : true, product: action.payload };
+    case PRODUCT_SAVE_FAIL:
+      // error is also in payload
+      return { loading: false, error: action.payload };
+    default:
+      // otherwise send initial state
+      return state;
+  }
+}
+
+export { productListReducer, productDetailsReducer, productSaveReducer };

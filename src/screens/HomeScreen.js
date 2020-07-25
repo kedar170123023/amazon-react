@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../actions/productListActions";
+import { Link } from "react-router-dom";
 
 export default function HomeScreen(props) {
   // ACCESING STORE
@@ -31,7 +32,7 @@ export default function HomeScreen(props) {
                   alt="product"
                 />
                 <div className="product-name">
-                  <a href="#">{product.name}</a>
+                  <Link to={`/products/${product._id}`}>{product.name}</Link>
                 </div>
                 <div className="product-brand">{product.brand}</div>
                 <div className="product-price">${product.price}</div>
