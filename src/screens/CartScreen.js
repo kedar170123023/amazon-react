@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 export default function CartScreen({ match, location, history }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  const productId = parseInt(match.params.id);
+  const productId = match.params.id;
 
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   console.log("qty, productId", qty, productId);
 
-  const removeFromHandler = (productId) => {
-    dispatch(removeFromCart(productId));
+  const removeFromHandler = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -21,6 +21,7 @@ export default function CartScreen({ match, location, history }) {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(productId,qty);
     dispatch(addToCart(productId, qty));
   }, []);
 
@@ -90,7 +91,7 @@ export default function CartScreen({ match, location, history }) {
 
       {/* CHECKOUT */}
 
-      <div className="cart-checkout">
+      <div className="cart-action">
         <h3>
           {/* sum = sum + item->quantity */}
           Subtotal ({cartItems.reduce((a, c) => a + parseInt(c.qty), 0)} items)

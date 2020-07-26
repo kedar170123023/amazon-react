@@ -20,18 +20,21 @@ export default function RegisterScreen(props) {
         e.preventDefault();
         dispatch(register(name, email,password));
     }
+    const redirect = props.location.search ? props.location.search.split("=")[1] : "/";
 
     useEffect(()=>{
         if(userInfo){
-            props.history.push("/");
+            props.history.push(redirect);
         }
     },[userInfo])
 
     return (
         <div className="form">
-            <ul class="form-container">
-                <h3>Careate Account</h3>
             <form onSubmit={submitHandler}>
+            <ul class="form-container">
+                <li>
+                    <h3>Careate Account</h3>
+                </li>
                 <li>
                     {loading && <div>Loading...</div>}
                     {error && <div> {error}</div>} 
@@ -60,11 +63,13 @@ export default function RegisterScreen(props) {
 
                 <li>New to KlickKart ? </li>
                 <li>
-                    <Link to="/signin" className="button secondary text-center">Already have an Acoount ?</Link>
+                   Already have an Acoount?
+                    <Link to={redirect==='/'?"signin": "signin?redirect="+redirect} className="button secondary text-center">Sign-in</Link>
+
                 </li>
-            </form>
 
             </ul>
+            </form>
             
         </div>
     )

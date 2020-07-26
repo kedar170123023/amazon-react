@@ -13,11 +13,11 @@ action = loding, products, error
 
  */
 
-import { ADD_TO_CART, ADDING_TO_CART, CART_REMOVE_ITEM } from "../constants";
+import { ADD_TO_CART, CART_REMOVE_ITEM, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT } from "../constants";
 
 // At One time only one item is added to cart
 // cartItems contains already contained payload
-function cartReducer(state = { cartItems: [] }, action) {
+function cartReducer(state = { cartItems: [], shipping : {}, payment : {}  }, action) {
   console.log(action.type);
   switch (action.type) {
     // initially loading
@@ -46,9 +46,16 @@ function cartReducer(state = { cartItems: [] }, action) {
       return {
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
+    case CART_SAVE_SHIPPING :
+      return {...state, shipping : action.payload}
+
+    case CART_SAVE_PAYMENT :
+      return {...state, payment : action.payload}
     default:
       return state;
   }
 }
+
+
 
 export { cartReducer };

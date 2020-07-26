@@ -9,6 +9,7 @@ export default function ProductScreen({ match, history }) {
   const [qty, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { product, loading, error } = productDetails;
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,17 +72,20 @@ export default function ProductScreen({ match, history }) {
                 {/* ------------------------------- */}
                 <li>
                   Status :{" "}
-                  {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
+               
+                  {product.countInStock > 0 ? product.countInStock+" In Stock" : "Out of Stock"}
+                  
                 </li>
                 {/* ------------------------------- */}
                 <li>
                   Qty :
                   <select value={qty} onChange={(e) => setQty(e.target.value)}>
-                    {[...Array(product.countInStock).keys()].map((x) => (
+                  
+                    {[...Array(product.countInStock).keys()].map((x) => 
                       <option key={x + 1} value={x + 1}>
                         {x + 1}
                       </option>
-                    ))}
+                    )}
                   </select>
                 </li>
                 {/* ------------------------------- */}

@@ -12,6 +12,7 @@ export default function SigninScreen(props) {
     const dispatch = useDispatch();
     const userSignin = useSelector(state=>state.userSignin); 
     const {loading, userInfo, error} = userSignin;
+    
 
 
     const submitHandler = (e)=>{
@@ -21,15 +22,18 @@ export default function SigninScreen(props) {
 
     }
 
+    const redirect = props.location.search ? props.location.search.split("=")[1] : "/";
+    console.log(redirect);
+
     useEffect(()=>{
         if(userInfo){
-            props.history.push("/");
+            props.history.push(redirect);
         }
     },[userInfo])
 
     return (
         <div className="form">
-            <ul class="form-container">
+            <ul className="form-container">
                 <h3>Sign-In</h3>
             <form onSubmit={submitHandler}>
                 <li>
@@ -52,7 +56,7 @@ export default function SigninScreen(props) {
 
                 <li>New to KlickKart ? </li>
                 <li>
-                    <Link to="/register" className="button secondary text-center">Create Your KlickKart Account</Link>
+                    <Link to={redirect==='/'?"register": "register?redirect="+redirect} className="button secondary text-center">Create Your KlickKart Account</Link>
                 </li>
             </form>
 
@@ -61,3 +65,4 @@ export default function SigninScreen(props) {
         </div>
     )
 }
+  

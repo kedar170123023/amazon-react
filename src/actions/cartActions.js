@@ -1,10 +1,10 @@
 import axios from "axios";
-import { ADD_TO_CART, CART_REMOVE_ITEM } from "../constants";
+import { ADD_TO_CART, CART_REMOVE_ITEM, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT } from "../constants";
 import Cookie from "js-cookie";
 const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(`/api/products/${productId}`);
-    // console.log(typeof data._id);
+    console.log("data for ading cart", data);
     const payload = {
       product: data._id,
       name: data.name,
@@ -38,4 +38,12 @@ const removeFromCart = (productId) => async (dispatch, getState) => {
   Cookie.set("cartItems", JSON.stringify(cartItems));
 };
 
-export { addToCart, removeFromCart };
+const saveShipping = (data)=>(dispatch)=>{
+  dispatch({type : CART_SAVE_SHIPPING, payload:data})
+}
+const savePayment = (data)=>(dispatch)=>{
+  dispatch({type : CART_SAVE_PAYMENT, payload:data})
+}
+
+
+export { addToCart, removeFromCart, saveShipping, savePayment };

@@ -8,6 +8,9 @@ import { Route, BrowserRouter, Link } from "react-router-dom";
 import CartScreen from "./screens/CartScreen";
 import { useSelector } from "react-redux";
 import ProductsScreen from "./screens/ProductsScreen";
+import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   const openMenu = () => {
@@ -62,6 +65,9 @@ function App() {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen}/>
+            <Route path="/shipping" component={ShippingScreen}/>
+            <Route path="/payment" component={PaymentScreen}/>
+            <Route path="/placeorder" component={PlaceOrderScreen}/>
           </div>
         </main>
         {/* <!-- FOOTER --> */}

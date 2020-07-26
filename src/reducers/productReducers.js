@@ -8,6 +8,9 @@ import {
   PRODUCT_SAVE_REQUEST,
   PRODUCT_SAVE_SUCCESS,
   PRODUCT_SAVE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL,
 } from "../constants";
 
 /* state = products : []
@@ -20,7 +23,7 @@ function productListReducer(state = { products: [] }, action) {
   switch (action.type) {
     // initially loading
     case PRODUCT_LIST_REQUEST:
-      return { loading: true };
+      return { loading: true, products : [] };
     // if success set loading false and products are in the action
     case PRODUCT_LIST_SUCCESS:
       return { loading: false, products: action.payload };
@@ -46,8 +49,26 @@ function productDetailsReducer(state = { product: {} }, action) {
       return { loading: true };
     // if success set loading false and products are in the action
     case PRODUCT_DETAILS_SUCCESS:
+      
       return { loading: false, product: action.payload };
     case PRODUCT_DETAILS_FAIL:
+      // error is also in payload
+      return { loading: false, error: action.payload };
+    default:
+      // otherwise send initial state
+      return state;
+  }
+}
+
+function productDeleteReducer(state = { product: {} }, action) {
+  switch (action.type) {
+    // initially loading
+    case PRODUCT_DELETE_REQUEST:
+      return { loading: true };
+    // if success set loading false and products are in the action
+    case PRODUCT_DELETE_SUCCESS:
+      return { loading: false, product: action.payload, success : true };
+    case PRODUCT_DELETE_FAIL:
       // error is also in payload
       return { loading: false, error: action.payload };
     default:
@@ -73,4 +94,4 @@ function productSaveReducer(state = { product: {} }, action) {
   }
 }
 
-export { productListReducer, productDetailsReducer, productSaveReducer };
+export { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer };

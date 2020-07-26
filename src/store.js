@@ -3,6 +3,7 @@ import {
   productListReducer,
   productDetailsReducer,
   productSaveReducer,
+  productDeleteReducer,
 } from "./reducers/productReducers";
 
 
@@ -22,10 +23,12 @@ const reducer = combineReducers({
   // for accessing product list
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productDelete: productDeleteReducer,
   productSave: productSaveReducer,
   cart: cartReducer,
   userSignin : userSigninReducer,
   userRegister : userRegisterReducer,
+
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
