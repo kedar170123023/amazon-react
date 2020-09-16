@@ -1,9 +1,10 @@
 import axios from "axios";
 import { ADD_TO_CART, CART_REMOVE_ITEM, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT } from "../constants";
 import Cookie from "js-cookie";
+import {base_url} from '../config/config'
 const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get(`/api/products/${productId}`);
+    const { data } = await axios.get(`${base_url}/api/products/${productId}`);
     console.log("data for ading cart", data);
     const payload = {
       product: data._id,

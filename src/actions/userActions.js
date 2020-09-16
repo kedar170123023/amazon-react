@@ -2,10 +2,11 @@ import axios from "axios";
 import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL } from "../constants";
 import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from "../constants";
 import Cookie from "js-cookie";
+import {base_url} from '../config/config'
 const signin = (email, password) => async (dispatch) => {
     dispatch({type:USER_SIGNIN_REQUEST, payload : {email, password} });
   try {
-    const { data } = await axios.post(`/api/users/signin`, {
+    const { data } = await axios.post(base_url+`/api/users/signin`, {
         email : email,
         password : password
     });
@@ -23,7 +24,7 @@ const signin = (email, password) => async (dispatch) => {
 const register = (name, email, password) => async (dispatch) => {
     dispatch({type:USER_REGISTER_REQUEST, payload : {name, email, password} });
   try {
-    const { data } = await axios.post(`/api/users/register`, {
+    const { data } = await axios.post(base_url+`/api/users/register`, {
         name : name,
         email : email,
         password : password
